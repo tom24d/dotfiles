@@ -16,7 +16,7 @@ ENV HOME "/root"
 ENV PYENV_ROOT "${HOME}/.pyenv"
 ENV PATH "${PYENV_ROOT}/bin:${PATH}"
 
-ENV PYTHON_VERSION 3.9.12
+ENV PYTHON_VERSION 3.9.14
 
 RUN git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv \
 && sed -Ei -e '/^([^#]|$)/ {a export PYENV_ROOT="$HOME/.pyenv" \
@@ -36,7 +36,8 @@ a ' -e ':a' -e '$!{n;ba};}' ~/.profile \
 RUN . ~/.profile \
 && pip install -U pip setuptools \
 && pip install torch torchvision torchaudio \
---extra-index-url https://download.pytorch.org/whl/cu115
+--extra-index-url https://download.pytorch.org/whl/cu115 \
+&& pip install numpy scipy sklearn networkx
 
 CMD ["python"]
 
